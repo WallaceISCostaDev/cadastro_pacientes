@@ -2,7 +2,7 @@
 print('-----Seja bem-vindo!-----')
 
 # Funções 
-pacientes = [
+pacientes = [ #lista de dicionários com os pacientes
     {
         "nome": "Ana Souza",
         "idade": 34,
@@ -89,8 +89,45 @@ pacientes = [
 def cadastro_paciente():
     print("Cadastro de paciente realizado com sucesso!")
 
-def consulta_paciente():
-    print("Consulta de paciente realizada com sucesso!")
+def consulta_paciente():  # Consulta paciente por nome ou cpf
+    while True:
+        try:
+            escolha_consulta = int(input('(1) Consulta por nome ou (2) Consulta por CPF: \n'))
+            if escolha_consulta in [1, 2]:  # Verifica se a entrada é válida
+                break  # Sai do loop se a entrada for correta
+            else:
+                print("Opção inválida. Digite 1 ou 2.")
+        except ValueError:
+            print("Entrada inválida. Digite um número válido.")
+
+    if escolha_consulta == 1:  # Pesquisa paciente por nome
+        nome = input('Digite o nome a consultar: ')
+        for paciente in pacientes:
+            if paciente['nome'].lower() == nome.lower():
+                print('---Resultado da Pesquisa---\n')
+                print(f'Nome: {paciente["nome"]}\n')
+                print(f'Idade: {paciente["idade"]}\n')
+                print(f'Sexo: {paciente["sexo"]}\n')
+                print(f'CPF: {paciente["cpf"]}\n')
+                print(f'Idoso: {paciente["idoso"]}\n')
+                print(f'Status: {paciente["status"]}\n')
+
+    elif escolha_consulta == 2:  # Pesquisa paciente por CPF
+        cpf = input('Digite o CPF a consultar: ')
+        for paciente in pacientes:
+            if paciente['cpf'].lower() == cpf.lower():
+                print('---Resultado da Pesquisa---\n')
+                print(f'Nome: {paciente["nome"]}\n')
+                print(f'Idade: {paciente["idade"]}\n')
+                print(f'Sexo: {paciente["sexo"]}\n')
+                print(f'CPF: {paciente["cpf"]}\n')
+                print(f'Idoso: {paciente["idoso"]}\n')
+                print(f'Status: {paciente["status"]}\n')
+    else:
+        print('Paciente não encontrado!')
+
+    
+
 
 def inserir_paciente():
     print("Paciente inserido na fila de atendimento!")
@@ -127,16 +164,16 @@ while True:
         # Verifica se a opção escolhida é válida
         if option_choice == 1:
             cadastro_paciente()
-            break  # Sai do loop após a escolha
+            
         elif option_choice == 2:
             consulta_paciente()
-            break  # Sai do loop após a escolha
+             
         elif option_choice == 3:
             inserir_paciente()
-            break  # Sai do loop após a escolha
+            
         elif option_choice == 4:
             visualizar_fila()
-            break  # Sai do loop após a escolha
+            
         else:
             print('Selecione uma opção válida!')
             continue  # Continua o loop se a opção for inválida
